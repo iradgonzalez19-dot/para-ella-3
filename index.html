@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Página secreta</title>
+  <style>
+    html, body {
+      background-color: #2e004f;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      cursor: none !important;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #a64dff;
+      text-shadow: 0 0 10px #a64dff, 0 0 20px #a64dff;
+    }
+    .box {
+      text-align: center;
+      background-color: rgba(0,0,0,0.4);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #a64dff;
+    }
+    input[type="password"], button {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      box-shadow: 0 0 10px #a64dff;
+    }
+    button {
+      background-color: #a64dff;
+      color: white;
+      cursor: pointer;
+    }
+    .cursor {
+      position: fixed;
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Holiii &lt;3</h1>
+  <div class="box">
+    <h2>Pon la contraseña</h2>
+    <input type="password" id="password" placeholder="Contraseña">
+    <br>
+    <button onclick="checkPassword()">Entrar</button>
+  </div>
+
+  <!-- Cursor Kuromi -->
+  <img src="kuromi normal.gif" class="cursor" id="cursor">
+
+  <script>
+    function checkPassword() {
+      const pass = document.getElementById("password").value;
+      if (pass === "0512") {
+        window.location.href = "pagina.html";
+      } else {
+        alert("Contraseña incorrecta");
+      }
+    }
+
+    // Cursor Kuromi
+    const cursor = document.getElementById("cursor");
+    const gifs = {
+      activo: "kuromi normal.gif",
+      inactivo: "kuromi dormido.gif",
+      enojado: "kuromi enojada.gif"
+    };
+    let inactividadTimer;
+    document.addEventListener("mousemove", e => {
+      cursor.style.left = e.pageX + "px";
+      cursor.style.top = e.pageY + "px";
+      cursor.src = gifs.activo;
+      resetInactividad();
+    });
+    function resetInactividad() {
+      clearTimeout(inactividadTimer);
+      inactividadTimer = setTimeout(() => {
+        cursor.src = gifs.inactivo;
+      }, 3000);
+    }
+    document.addEventListener("mousedown", () => cursor.src = gifs.enojado);
+    document.addEventListener("mouseup", () => {cursor.src = gifs.activo; resetInactividad();});
+    resetInactividad();
+  </script>
+</body>
+</html>
